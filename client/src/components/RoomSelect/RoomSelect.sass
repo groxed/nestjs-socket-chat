@@ -1,0 +1,47 @@
+.RoomSelect
+    &__Rooms
+        width: 70vw
+        display: flex
+        flex-direction: column
+        margin: auto
+        margin-top: 3rem
+        border-radius: 0.5rem
+        border: 2px solid black
+        font-size: 2rem
+
+        &-usernameInput
+            font-size: 2rem
+            display: flex
+            justify-content: space-between
+
+            input
+                font-size: 2rem
+                height: 5rem
+                text-align: center
+                width: 80%
+
+
+        &-item
+            min-height: 5rem
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            align-items: center
+            cursor: pointer
+
+            &:not(:last-child)
+                border-bottom: 2px solid black
+
+            &-delete
+                color: red
+                margin-left: 5rem
+
+
+            &.newRoom
+                background-color: lightgray
+
+    &__Error
+        font-size: 1rem
+        color: salmon
+
+
