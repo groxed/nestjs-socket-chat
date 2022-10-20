@@ -44,9 +44,8 @@ const ChatSocket: React.FC<componentProps> = ({
     return () => {
       socket.disconnect();
     };
-
     //eslint-disable-next-line
-  }, []);
+  }, [username]);
 
   return <></>;
 };

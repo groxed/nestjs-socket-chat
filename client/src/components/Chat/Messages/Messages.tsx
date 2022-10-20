@@ -16,9 +16,14 @@ const Messages = ({ messages }: componentProps) => {
 
   return (
     <div className="Chat__Messages" ref={chatMessagesRef}>
-      {messages.map(({ senderName, content }, idx: number) => (
+      {messages.map(({ senderName, content, createdAt }, idx: number) => (
         <div className="Chat__Messages-item" key={idx}>
-          {`${senderName}: ${content}`}
+          {`${senderName}: ${content} `}
+          {createdAt && (
+            <span className="Chat__Messages-item__time">
+              {new Date(createdAt).toLocaleTimeString('it-IT')}
+            </span>
+          )}
         </div>
       ))}
     </div>

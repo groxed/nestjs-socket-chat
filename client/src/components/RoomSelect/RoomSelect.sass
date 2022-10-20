@@ -3,23 +3,23 @@
         width: 70vw
         display: flex
         flex-direction: column
-        margin: auto
-        margin-top: 3rem
+        margin: 3rem auto
         border-radius: 0.5rem
         border: 2px solid black
-        font-size: 2rem
+        font-size: 3vw
 
-        &-usernameInput
-            font-size: 2rem
+        &__usernameInput
             display: flex
             justify-content: space-between
 
-            input
-                font-size: 2rem
-                height: 5rem
-                text-align: center
-                width: 80%
+            p
+                margin: auto
 
+            input
+                font-size: 3vw
+                height: 6vw
+                text-align: center
+                width: 60%
 
         &-item
             min-height: 5rem
@@ -29,16 +29,24 @@
             align-items: center
             cursor: pointer
 
-            &:not(:last-child)
+            &:not(:nth-last-child(2))
                 border-bottom: 2px solid black
 
-            &-delete
+            &:last-child
+                border: none
+
+            &__delete
                 color: red
                 margin-left: 5rem
 
-
-            &.newRoom
+            &.NewRoom
                 background-color: lightgray
+
+        &--noRooms
+            height: 5rem
+            display: flex
+            align-items: center
+            justify-content: center
 
     &__Error
         font-size: 1rem

@@ -7,7 +7,6 @@ import { ChatGateway } from './gateways/chat.gateway';
 
 @Module({
   imports: [SequelizeModule.forFeature([Room, Message])],
-  controllers: [],
   providers: [ChatService, ChatGateway],
 })
 export class ChatModule {}

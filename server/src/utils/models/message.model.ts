@@ -26,8 +26,4 @@ export class Message extends Model {
     allowNull: false,
   })
   roomId: string;
-
-  @CreatedAt
-  @Column
-  createdAt: Date;
 }

@@ -36,9 +36,9 @@ const Chat = ({ username, chatMessages, usersInRoom }: componentProps) => {
         >
           <p>Users in this room</p>
         </div>
-        <div className="Chat__UsersInRoom-users">
+        <div className="Chat__UsersInRoom__users">
           {usersInRoom.map((user) => (
-            <div className="Chat__UsersInRoom-users-item" key={user.id}>
+            <div className="Chat__UsersInRoom__users-item" key={user.id}>
               {`${user.username} (id: ${user.id})`}
             </div>
           ))}
@@ -46,9 +46,9 @@ const Chat = ({ username, chatMessages, usersInRoom }: componentProps) => {
       </div>
       <Messages messages={chatMessages} />
       <div className="Chat__UserInputs">
-        <div className="Chat__UserInputs-username">{`[${username}]:`}</div>
+        <div className="Chat__UserInputs__username">{`[${username}]:`}</div>
         <input
-          className="Chat__UserInputs-messageInput"
+          className="Chat__UserInputs__messageInput"
           type="text"
           onChange={messageInputHandler}
           onKeyDown={messageKeyDownHandler}

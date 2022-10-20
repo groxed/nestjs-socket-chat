@@ -24,7 +24,5 @@ import { RoomsModule } from './rooms/rooms.module';
     ChatModule,
     RoomsModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

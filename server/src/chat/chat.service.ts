@@ -15,6 +15,10 @@ export class ChatService {
     private messageModel: typeof Message,
   ) {}
 
+  getRoomId(client: Socket): string {
+    return client.handshake.query.roomId.toString();
+  }
+
   async joinToRoom(client: Socket): Promise<string> {
     try {
       const roomId = client.handshake.query.roomId.toString();
@@ -37,9 +41,12 @@ export class ChatService {
     }
   }
 
-  async addRoomMessage(roomId: string, message: ClientMessage) {
+  async addRoomMessage(
+    roomId: string,
+    message: ClientMessage,
+  ): Promise<Message> {
     try {
-      await this.messageModel.create({
+      return await this.messageModel.create({
         ...message,
         roomId,
       });

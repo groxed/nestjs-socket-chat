@@ -8,7 +8,7 @@ import {
 } from '../../utils/api';
 import { Room } from '../../utils/types/room';
 import './RoomSelect.sass';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 type componentProps = {
   usernameState: any;
@@ -43,7 +43,7 @@ const RoomSelect = ({ usernameState }: componentProps) => {
       .catch((e) => console.error(e));
   };
   const createRoom = async () => {
-    const newRoom = { id: `${uuidv4()}` };
+    const newRoom = { id: `${nanoid(5)}` };
 
     await createNewRoom(newRoom)
       .then(() => {
@@ -71,7 +71,7 @@ const RoomSelect = ({ usernameState }: componentProps) => {
         <Loader />
       ) : (
         <>
-          <div className="RoomSelect__Rooms-usernameInput">
+          <div className="RoomSelect__Rooms__usernameInput">
             <p>Username: </p>
             <input
               type="text"
@@ -83,22 +83,26 @@ const RoomSelect = ({ usernameState }: componentProps) => {
             <span className="RoomSelect__Error">{inputError}</span>
           )}
 
-          {availableRooms.map((room) => (
-            <div
-              className="RoomSelect__Rooms-item"
-              key={room.id}
-              onClick={() => redirectToRoom(room.id)}
-            >
-              Room {room.id}
-              <span
-                className="RoomSelect__Rooms-item-delete"
-                onClick={(e) => deleteRoom(e, room.id)}
+          {!!availableRooms.length ? (
+            availableRooms.map((room) => (
+              <div
+                className="RoomSelect__Rooms-item"
+                key={room.id}
+                onClick={() => redirectToRoom(room.id)}
               >
-                X
-              </span>
-            </div>
-          ))}
-          <div className="RoomSelect__Rooms-item newRoom" onClick={createRoom}>
+                Room {room.id}
+                <span
+                  className="RoomSelect__Rooms-item__delete"
+                  onClick={(e) => deleteRoom(e, room.id)}
+                >
+                  X
+                </span>
+              </div>
+            ))
+          ) : (
+            <div className="RoomSelect__Rooms--noRooms">No rooms yet</div>
+          )}
+          <div className="RoomSelect__Rooms-item NewRoom" onClick={createRoom}>
             + New room
           </div>
         </>

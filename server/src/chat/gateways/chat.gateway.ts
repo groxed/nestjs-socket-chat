@@ -23,10 +23,9 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(private readonly chatService: ChatService) {}
 
   handleDisconnect(client: Socket) {
-    const roomId = client.handshake.query.roomId.toString();
-
-    this.updateUsersInRoom(roomId);
+    this.updateUsersInRoom(this.chatService.getRoomId(client));
   }
+
   handleConnection(client: Socket, ...args: any[]) {
     console.log(`Client ${client.id} connected`);
 
@@ -40,10 +39,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() client: Socket,
     @MessageBody() message: ClientMessage,
   ) {
-    const roomId = client.handshake.query.roomId.toString();
-    this.server.to(roomId).emit('ReceiveMessage', message);
+    this.processMessage(this.chatService.getRoomId(client), message);
+  }
 
-    this.chatService.addRoomMessage(roomId, message);
+  processMessage(roomId: string, message: ClientMessage): void {
+    this.chatService.addRoomMessage(roomId, message).then((message) => {
+      this.server.to(roomId).emit('ReceiveMessage', message);
+    });
   }
 
   updateUsersInRoom(roomId: string): void {
